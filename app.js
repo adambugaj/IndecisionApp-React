@@ -76,6 +76,11 @@ const removeAll = () => {
 console.log(Math.random().toFixed(3));
 const numbers = [20, 40, 60, 80];
 
+const onMakeDecision = () => {
+  const randNum = Math.floor(Math.random() * app.options.length);
+  console.log(randNum, app.options.length);
+};
+onMakeDecision()
 const newRenderApp = () => {
   const newFormApp = (
     <div id="row">
@@ -86,21 +91,13 @@ const newRenderApp = () => {
            <p>{(app.options && app.options.length > 0) ? app.options : 'No options available'}</p>
            {
 
-             app.options.map((option) => {
-               console.log();
-
-                if (option === document.getElementsByTagName('option')) {
-                  console.log()
-                  return <p key={Math.random().toFixed(3)}>Options: {option}</p>;
-                } else {
-                  return <p key={option}>Options: {option}</p>;
-                }
-             })
+             app.options.map((option) => <p key={option + Math.random().toFixed(3)}>Options: {option}</p>
+              )
 
            }
            <button onClick={removeOne} className="btn waves-effect waves-light">Remove</button>
            <button onClick={removeAll} className="btn waves-effect waves-light">Remove All</button>
-
+           <button disabled={app.options.length === 0 && true} onClick={onMakeDecision} className="btn waves-effect waves-light">What should I do</button>
          </div>
        </div>
      </div>
