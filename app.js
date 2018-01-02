@@ -73,7 +73,7 @@ const removeAll = () => {
   count = 0;
   newRenderApp();
 }
-
+console.log(Math.random().toFixed(3));
 const numbers = [20, 40, 60, 80];
 
 const newRenderApp = () => {
@@ -85,19 +85,22 @@ const newRenderApp = () => {
            {app.title && <span className="card-title">{app.title} {count}</span>}
            <p>{(app.options && app.options.length > 0) ? app.options : 'No options available'}</p>
            {
+
              app.options.map((option) => {
-               return <p key={option}>Options: {option}</p>;
+               console.log();
+
+                if (option === document.getElementsByTagName('option')) {
+                  console.log()
+                  return <p key={Math.random().toFixed(3)}>Options: {option}</p>;
+                } else {
+                  return <p key={option}>Options: {option}</p>;
+                }
              })
 
            }
            <button onClick={removeOne} className="btn waves-effect waves-light">Remove</button>
            <button onClick={removeAll} className="btn waves-effect waves-light">Remove All</button>
-           {
-             numbers.map((number) => {
-               return <p key={number}>Number: {number *2}</p>;
 
-             })
-           }
          </div>
        </div>
      </div>
