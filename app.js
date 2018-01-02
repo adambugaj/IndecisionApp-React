@@ -81,6 +81,7 @@ const onMakeDecision = () => {
   console.log(randNum, app.options.length);
 };
 onMakeDecision()
+
 const newRenderApp = () => {
   const newFormApp = (
     <div id="row">
@@ -90,10 +91,8 @@ const newRenderApp = () => {
            {app.title && <span className="card-title">{app.title} {count}</span>}
            <p>{(app.options && app.options.length > 0) ? app.options : 'No options available'}</p>
            {
-
              app.options.map((option) => <p key={option + Math.random().toFixed(3)}>Options: {option}</p>
               )
-
            }
            <button onClick={removeOne} className="btn waves-effect waves-light">Remove</button>
            <button onClick={removeAll} className="btn waves-effect waves-light">Remove All</button>
@@ -111,56 +110,3 @@ const newRenderApp = () => {
   ReactDOM.render(newFormApp, appRoot);
 };
 newRenderApp();
-
-// const renderCounter = () => {
-//   const template = (
-//     <div id="row">
-//        <div className="col s12 m6">
-//          <div className="card blue-grey darken-1">
-//            <div className="card-content white-text">
-//              <span className="card-title">{templateObject.title}</span>
-//              <p>Author: {templateObject.author ? templateObject.author : 'Anonymous'}</p>
-//            </div>
-//          </div>
-//        </div>
-//        <ul className="collection with-header">
-//          <li className="collection-header"><h5>Contact Information</h5></li>
-//          <li className="collection-item"><div>{templateObject.contactInfo.numberPhone}<a href="#!" className="secondary-content"><i className="material-icons">Like</i></a></div></li>
-//          {(templateObject.age && templateObject.age > 18) && <li className="collection-item"><div>{templateObject.age}<a href="#!" className="secondary-content"><i className="material-icons">Like</i></a></div></li>}
-//          <li className="collection-item"><div>{templateObject.contactInfo.email}<a href="#!" className="secondary-content"><i className="material-icons">Like</i></a></div></li>
-//          {getLocation(templateObject.location)}
-//        </ul>
-//        <div className="col s12 m6">
-//          <div className="card yellow darken-1">
-//            <div className="card-content white-text">
-//              {app.title && <span className="card-title">{app.title}</span>}
-//              <p>{(app.options && app.options.length > 0) ? app.options : 'No options available'}</p>
-//
-//            </div>
-//          </div>
-//        </div>
-//
-//        <div className="card blue-grey darken-1">
-//          <div className="card-content white-text">
-//            {count != 0 && <span className="card-title">Count: {count}</span>}
-//          </div>
-//        </div>
-//        <button onClick={addNumber} className="btn waves-effect waves-light" type="submit" name="action">+
-//          </button>
-//        <button onClick={minusOne} className="btn waves-effect waves-light" type="submit" name="action">-
-//          </button>
-//          <button onClick={reset} className="btn waves-effect waves-light" type="submit" name="action">Reset
-//            </button>
-//
-//            {/* form for app */}
-//            <form onSubmit={onFormSubmit}>
-//              <input type="text" name="option" />
-//              <button className="btn waves-effect waves-light">Add</button>
-//            </form>
-//
-//
-//      </div>
-//   );
-//   ReactDOM.render(template, appRoot);
-// }
-// renderCounter();
