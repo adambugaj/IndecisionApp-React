@@ -1,3 +1,12 @@
+const obj = {
+  name: 'Vikram',
+  getName() {
+    return this.name;
+  }
+}
+const getName = obj.getName.bind(obj);
+console.log(getName());
+
 class IndecisionApp extends React.Component {
   render() {
     const title = 'IndecisionApp about';
@@ -39,8 +48,13 @@ class Action extends React.Component {
 }
 
 class Options extends React.Component {
+  constructor(props) {
+    super(props);
+    this.removeAll = this.removeAll.bind(this);
+  }
   removeAll() {
     console.log('New message!')
+    console.log(this.props.option);
   }
   render() {
     return (
@@ -49,7 +63,7 @@ class Options extends React.Component {
         {
           this.props.option.map((option) => <Option key={option} optionId={option}/>)
         }
-        <button onClick={this.removeAll} className="btn waves-effect waves-light">Remove All</button>
+        <button onClick={this.removeAll.bind(this)} className="btn waves-effect waves-light">Remove All</button>
       </div>
     );
   }
@@ -73,14 +87,15 @@ class AddOption extends React.Component {
     if (!!getVal) {
       console.log(`it's true`);
       console.log(getVal);
-      //this.options.push(getVal);
+      this.props.option.push(Number(getVal));
+      console.log(this.props.option);
     }
   }
   render() {
     return (
       <div>
         <p> Add Your favourite options:</p>
-        <form onSubmit={this.onClickData}>
+        <form onSubmit={this.onClickData.bind(this)}>
         <input type="text" name="option" />
         <button className="btn waves-effect waves-light">Submit</button>
         </form>
