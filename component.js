@@ -4,17 +4,37 @@ class IndecisionApp extends React.Component {
     this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
     this.randomNumber = this.randomNumber.bind(this);
     this.handleAddOption = this.handleAddOption.bind(this);
+    this.handleDeleteOption = this.handleDeleteOption.bind(this);
     this.state = {
-      options: props.options
+      options: []
     };
   }
 
+// Show new element from local storage
+componentDidMount() {
+  console.log('fetching data');
+  try {
+    const json = localStorage.getItem('options');
+    const options = JSON.parse(json);
+    if(options) {
+    this.setState(() => ({options}))
+    }
+  } catch (e) {
+    log('you have an error')
+  }
+}
+
+componentDidUpdate(prevProps, prevState) {
+  // Check if previous state is not the same as current state and save new element
+  if (prevState.options.length !== this.state.options.length) {
+    const json = JSON.stringify(this.state.options);
+    localStorage.setItem('options', json);
+
+  }
+}
+
   handleDeleteOptions() {
-    this.setState(() => {
-      return {
-        options: []
-      };
-    });
+    this.setState(() => ({ options: [] }));
   }
 
   randomNumber() {
@@ -22,20 +42,26 @@ class IndecisionApp extends React.Component {
     console.log(this.state.options[randomNum]);
   }
 
+// Remove one exact element from the list
+handleDeleteOption(optionToRemove) {
+  console.log('Element: ', optionToRemove);
+  this.setState((prevState) => ({
+    options: prevState.options.filter((option) => optionToRemove !== option)
+  }));
+
+}
   handleAddOption(getVal) {
     if (!getVal) {
       return 'Enter valid value to add item';
     } else if (this.state.options.indexOf(Number(getVal)) > -1) {
       return 'This option already exists'
     }
-    this.setState((prevState) => {
-      return {
-        options: prevState.options.concat(Number(getVal))
-      };
-    });
-    console.log(this.state.options);
+    // Add new element to options object
+    this.setState((prevState) => ({
+      options: prevState.options.concat(Number(getVal))
+    }));
+    console.log(`State:`,this.state.options);
   }
-
   render() {
     const title = 'IndecisionApp about';
     const subTitle = 'Put your life in a hand of a computer';
@@ -49,6 +75,7 @@ class IndecisionApp extends React.Component {
         <Options
           option={this.state.options}
           handleDeleteOptions={this.handleDeleteOptions}
+          handleDeleteOption={this.handleDeleteOption}
         />
         <AddOption
           handleAddOption={this.handleAddOption}
@@ -56,9 +83,6 @@ class IndecisionApp extends React.Component {
       </div>
     );
   }
-}
-IndecisionApp.defaultProps = {
-  options: []
 }
 
 const Header = (props) => {
@@ -118,9 +142,17 @@ const Action = (props) => {
 const Options = (props) => {
   return (
     <div>
-      <p>Options component here:</p>
       {
-        props.option.map((option) => <Option key={option} optionId={option}/>)
+        props.option.length === 0 ? <p>Please add an option to get started</p> : <p>Options component that you have:</p>
+      }
+      {
+        props.option.map((option) => (
+        <Option
+          key={option}
+          optionId={option}
+          handleDeleteOption={props.handleDeleteOption}
+        />
+      ))
       }
       {
         props.option.length > 0 ?
@@ -149,7 +181,15 @@ const Options = (props) => {
 const Option = (props) => {
   return (
     <div>
-      Options to choose: {props.optionId}
+      <p>Options to choose: {props.optionId}
+        <button
+          onClick={(e) => {
+            props.handleDeleteOption(props.optionId)
+          }}
+          className="btn waves-effect waves-light">
+          Remove
+        </button>
+      </p>
     </div>
   );
 }
@@ -177,10 +217,12 @@ class AddOption extends React.Component {
     const getVal = e.target.elements.option.value.trim();
     const error = this.props.handleAddOption(getVal);
 
-    this.setState(() => {
-      return { error }
-    });
+    this.setState(() => ({ error }));
+    if (!error) {
+      e.target.elements.option.value = ''
+    }
   }
+
   render() {
     return (
       <div>

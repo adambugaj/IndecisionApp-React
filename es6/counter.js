@@ -53,5 +53,9 @@ class Counter extends React.Component {
     );
   }
 }
+// Default options
+// Counter.defaultProps = {
+//   count: 1
+// }
 
 ReactDOM.render(<Counter />, document.getElementById('app'));
