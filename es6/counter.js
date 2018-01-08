@@ -9,6 +9,29 @@ class Counter extends React.Component {
       count: 0
     }
   }
+// Lifecycles components
+componentDidMount() {
+  try {
+    const json = localStorage.getItem('countNumber');
+    const checkLocalStorage = parseInt(json, 10);
+
+    // check if count is a number and then put the new element
+    if(!isNaN(checkLocalStorage)) {
+      this.setState(() => ({ count: checkLocalStorage }));
+    }
+  } catch(e) {
+  }
+}
+
+componentDidUpdate(prevProps, prevState) {
+  console.log(prevState.count, this.state.count);
+  if(prevState.count !== this.state.count) {
+    const makeString = JSON.stringify(this.state.count)
+    localStorage.setItem('countNumber', makeString);
+  }
+}
+
+
   // Mehtods:
   // Increment the counter
   handleAddOne() {
@@ -35,11 +58,11 @@ class Counter extends React.Component {
         count: 0
       };
     });
-    this.setState((prevState) => {
-      return {
-        count: prevState.count + 1
-      }
-    })
+    // this.setState((prevState) => {
+    //   return {
+    //     count: prevState.count + 1
+    //   }
+    // });
     console.log('handleReset');
   }
   render() {
