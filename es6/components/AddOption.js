@@ -1,21 +1,22 @@
 import React from 'react';
 
 export default class AddOption extends React.Component {
-  constructor(props) {
-    super(props);
-    this.onClickData = this.onClickData.bind(this);
-    this.state = {
-      error: undefined
-    };
-  }
-  onClickData(e) {
+  state = {
+    error: undefined
+  };
+  //does not need with new syntax plugin
+//   constructor(props) {
+//     super(props);
+//     this.onClickData = this.onClickData.bind(this);
+// }
+  onClickData = (e) => {
     e.preventDefault();
     const getVal = e.target.elements.option.value.trim();
     const error = this.props.handleAddOption(getVal);
 
     this.setState(() => ({ error }));
     if (!error) {
-      e.target.elements.option.value = ''
+      e.target.elements.option.value = '';
     }
   }
   render() {
