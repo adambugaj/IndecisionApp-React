@@ -1,11 +1,6 @@
-// //import './utils.js';
-// import { square, add } from './utils.js';
-//
-// console.log('app.js is running smoothly!!');
-// console.log(square(5));
-// console.log(add(5, 5));
+// install -> import -> use
+import React from 'react';
+import ReactDOM from 'react-dom';
+import IndecisionApp from './es6/components/IndecisionApp';
 
-import { isAdult, canDrink } from './person.js';
-
-console.log(isAdult(16));
-console.log(canDrink(12));
+ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
