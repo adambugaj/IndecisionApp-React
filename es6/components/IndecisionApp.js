@@ -46,6 +46,7 @@ export default class IndecisionApp extends React.Component {
       options: prevState.options.filter((option) => optionToRemove !== option)
     }));
   };
+
   handleAddOption = (getVal) => {
     if (!getVal) {
       return 'Enter valid value to add item';
@@ -54,7 +55,7 @@ export default class IndecisionApp extends React.Component {
     }
     // Add new element to options object
     this.setState((prevState) => ({
-      options: prevState.options.concat(Number(getVal))
+      options: prevState.options.concat(getVal)
     }));
     console.log(`State:`,this.state.options);
   };
@@ -94,15 +95,17 @@ export default class IndecisionApp extends React.Component {
             hasOptions={this.state.options.length > 0}
             randomNumber={this.randomNumber}
           />
-          <Options
-            option={this.state.options}
-            handleDeleteOptions={this.handleDeleteOptions}
-            handleDeleteOption={this.handleDeleteOption}
-          />
-          <AddOption
-            handleAddOption={this.handleAddOption}
-          />
-        </div>
+          <div className="widget">
+            <Options
+              option={this.state.options}
+              handleDeleteOptions={this.handleDeleteOptions}
+              handleDeleteOption={this.handleDeleteOption}
+            />
+            <AddOption
+              handleAddOption={this.handleAddOption}
+            />
+          </div>
+      </div>
         <OptionModal
           selectedOption={this.state.selectedOption}
           handleCloseSelectedOption={this.handleCloseSelectedOption}

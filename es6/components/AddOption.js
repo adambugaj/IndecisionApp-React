@@ -23,17 +23,12 @@ export default class AddOption extends React.Component {
   render() {
     return (
       <div>
-        <p> Add Your favourite options:</p>
         {
-          this.state.error && <p>{this.state.error}</p>
+          this.state.error && <p className="add-option-error">{this.state.error}</p>
         }
-        <form onSubmit={this.onClickData}>
-        <input type="text" name="option" />
-        <button
-          className="btn waves-effect waves-light"
-        >
-          Submit
-        </button>
+        <form className="add-option" onSubmit={this.onClickData}>
+          <input className="add-option__input" type="text" name="option" placeholder="Add your favourite option here" />
+          <button className="button">Submit</button>
         </form>
       </div>
     );

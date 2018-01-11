@@ -2,15 +2,15 @@ import React from 'react';
 import Modal from 'react-modal';
 
 const OptionModal = (props) => {
-  console.log(props.selectedOption);
   return (
-    <Modal
+    <Modal className="modal"
       isOpen={!!props.selectedOption}
       onRequestClose={props.handleCloseSelectedOption}
       contentLabel="Selected Option"
+      closeTimeoutMS={600}
     >
-      <h3>Selected Option</h3>
-      {props.selectedOption && <p>{props.selectedOption}</p>}
+      <h3 className="modal__title">Selected Option</h3>
+      {props.selectedOption && <p className="modal_body">{props.selectedOption}</p>}
       <button onClick = {props.handleCloseSelectedOption} className="button">OK</button>
     </Modal>
   )

@@ -2,8 +2,8 @@ import React from 'react';
 
 const Option = (props) => {
   return (
-    <div>
-      <p>Options to choose: {props.optionId}
+    <div className="option">
+      <p className="option__text ">{props.optionCount}. {props.optionId}</p>
         <button
           onClick={(e) => {
             props.handleDeleteOption(props.optionId)
@@ -11,7 +11,6 @@ const Option = (props) => {
           className="button button--link">
           Remove
         </button>
-      </p>
     </div>
   );
 }
