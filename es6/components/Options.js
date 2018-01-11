@@ -18,7 +18,12 @@ const Options = (props) => {
       }
       {
         props.option.length > 0 ?
-        <button onClick={props.handleDeleteOptions} className="btn waves-effect waves-light">Remove All</button> : ''
+        <button
+          onClick={props.handleDeleteOptions}
+          className="button button--link"
+          >
+            Remove All
+          </button> : ''
     }
     </div>
   );

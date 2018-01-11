@@ -84,23 +84,25 @@ export default class IndecisionApp extends React.Component {
 
 
   render() {
-    const title = 'IndecisionApp about';
+    const title = 'Indecision App';
     const subTitle = 'Put your life in a hand of a computer';
     return (
       <div>
         <Header aboutTitle={title} subTitle={subTitle} />
-        <Action
-          hasOptions={this.state.options.length > 0}
-          randomNumber={this.randomNumber}
-        />
-        <Options
-          option={this.state.options}
-          handleDeleteOptions={this.handleDeleteOptions}
-          handleDeleteOption={this.handleDeleteOption}
-        />
-        <AddOption
-          handleAddOption={this.handleAddOption}
-        />
+        <div className="container">
+          <Action
+            hasOptions={this.state.options.length > 0}
+            randomNumber={this.randomNumber}
+          />
+          <Options
+            option={this.state.options}
+            handleDeleteOptions={this.handleDeleteOptions}
+            handleDeleteOption={this.handleDeleteOption}
+          />
+          <AddOption
+            handleAddOption={this.handleAddOption}
+          />
+        </div>
         <OptionModal
           selectedOption={this.state.selectedOption}
           handleCloseSelectedOption={this.handleCloseSelectedOption}

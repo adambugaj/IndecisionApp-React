@@ -5,7 +5,7 @@ const Action = (props) => (
       <button
         disabled={!props.hasOptions}
         onClick={props.randomNumber}
-        className="btn waves-effect waves-light"
+        className="big-button"
       >
         What should I do?
       </button>
