@@ -10,6 +10,7 @@ export default class IndecisionApp extends React.Component {
     options: [],
     selectedOption: undefined
   };
+
   // constructor(props) {
   //   super(props);
   //   this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
@@ -63,6 +64,7 @@ export default class IndecisionApp extends React.Component {
   // Show new element from local storage
   componentDidMount() {
     console.log('fetching data');
+      console.log('works?');
     try {
       const json = localStorage.getItem('options');
       const options = JSON.parse(json);
